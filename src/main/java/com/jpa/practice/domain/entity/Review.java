@@ -29,6 +29,6 @@ public class Review {
 
     @ManyToOne
     @OrderBy("id asc")
-    @JoinColumn(name = "hospital_id")
+    @JoinColumn(name = "hospital2_id")
     private Hospital hospital;
 }
