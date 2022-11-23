@@ -22,12 +22,12 @@ public class Book {
     private String name;
 
     @ManyToOne (fetch = FetchType.EAGER)
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "author2_id")
     @ToString.Exclude
     private Author author;
 
     @ManyToOne (fetch = FetchType.EAGER)
-    @JoinColumn(name = "publisher_id")
+    @JoinColumn(name = "publisher2_id")
     @ToString.Exclude
     private Publisher publisher;
 }
