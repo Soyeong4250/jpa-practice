@@ -6,6 +6,9 @@ import com.jpa.practice.domain.dto.ReviewResponseDto;
 import com.jpa.practice.service.HospitalService;
 import com.jpa.practice.service.ReviewService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +38,12 @@ public class HospitalRestController {
     public ResponseEntity<HospitalResponseDto> getHospital(@PathVariable Long id) {
         HospitalResponseDto hospitalResponseDto = hospitalService.getHospital(id);
         return ResponseEntity.ok().body(hospitalResponseDto);
+    }
+
+    @GetMapping("/{id}/reviews")
+    public ResponseEntity<List<ReviewResponseDto>> getReviewByHospital(@PathVariable Long id, @PageableDefault(size = 10) Pageable pageable) {
+        List<ReviewResponseDto> reviewResponseList = reviewService.getReviewList(id, pageable);
+        return ResponseEntity.ok().body(reviewResponseList);
     }
 
     @PostMapping("/{id}/reviews")
