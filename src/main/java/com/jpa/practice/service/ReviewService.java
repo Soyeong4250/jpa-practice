@@ -6,9 +6,13 @@ import com.jpa.practice.domain.entity.Hospital;
 import com.jpa.practice.domain.entity.Review;
 import com.jpa.practice.repository.HospitalRepository;
 import com.jpa.practice.repository.ReviewRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewService {
@@ -31,11 +35,34 @@ public class ReviewService {
                 .hospital(hospital.get())
                 .build();
         Review savedReview = reviewRepository.save(review);
-        return new ReviewResponseDto(savedReview.getTitle(), savedReview.getContent(), savedReview.getUserName(),"리뷰 등록 성공");
+        return ReviewResponseDto.builder()
+                .title(savedReview.getTitle())
+                .content(savedReview.getContent())
+                .userName(savedReview.getUserName())
+                .message("리뷰 등록 성공")
+                .build();
     }
 
     public ReviewResponseDto getReview(Long id) {
         Review review = reviewRepository.findById(id).get();
-        return new ReviewResponseDto(review.getTitle(), review.getContent(), review.getUserName(), "리뷰 조회 성공");
+        return ReviewResponseDto.builder()
+                .title(review.getTitle())
+                .content(review.getContent())
+                .userName(review.getUserName())
+                .message("리뷰 조회 성공")
+                .build();
+    }
+
+    public List<ReviewResponseDto> getReviewList(Long id, Pageable pageable) {
+        Page<Review> reviewList = reviewRepository.findByHospitalId(id, pageable);
+        List<ReviewResponseDto> reviewResponseList = reviewList.stream().map((review) -> {
+            return ReviewResponseDto.builder()
+                    .title(review.getTitle())
+                    .content(review.getContent())
+                    .userName(review.getUserName())
+                    .message("리뷰 조회 성공")
+                    .build();
+        }).collect(Collectors.toList());
+        return reviewResponseList;
     }
 }
