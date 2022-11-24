@@ -1,13 +1,13 @@
 package com.jpa.practice.controller;
 
 import com.jpa.practice.domain.dto.HospitalResponseDto;
+import com.jpa.practice.domain.dto.ReviewRequestDto;
+import com.jpa.practice.domain.dto.ReviewResponseDto;
 import com.jpa.practice.service.HospitalService;
+import com.jpa.practice.service.ReviewService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,9 +18,11 @@ import java.util.List;
 public class HospitalRestController {
 
     private final HospitalService hospitalService;
+    private final ReviewService reviewService;
 
-    public HospitalRestController(HospitalService hospitalService) {
+    public HospitalRestController(HospitalService hospitalService, ReviewService reviewService) {
         this.hospitalService = hospitalService;
+        this.reviewService = reviewService;
     }
 
     @GetMapping()
@@ -33,5 +35,10 @@ public class HospitalRestController {
     public ResponseEntity<HospitalResponseDto> getHospital(@PathVariable Long id) {
         HospitalResponseDto hospitalResponseDto = hospitalService.getHospital(id);
         return ResponseEntity.ok().body(hospitalResponseDto);
+    }
+
+    @PostMapping("/{id}/reviews")
+    public ResponseEntity<ReviewResponseDto> addReview(@PathVariable Long id, @RequestBody ReviewRequestDto reviewRequestDto) {
+        return ResponseEntity.ok().body(reviewService.add(reviewRequestDto));
     }
 }
