@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ReviewRequestDto {
 
+    private Long hospitalId;
     private String title;
     private String content;
     private String userName;
-    private Long hospitalId;
 }
