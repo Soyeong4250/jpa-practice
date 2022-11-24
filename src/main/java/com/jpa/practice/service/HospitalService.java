@@ -2,16 +2,20 @@ package com.jpa.practice.service;
 
 import com.jpa.practice.domain.dto.HospitalResponseDto;
 import com.jpa.practice.domain.entity.Hospital;
-import com.jpa.practice.domain.entity.Review;
 import com.jpa.practice.repository.HospitalRepository;
 import com.jpa.practice.repository.ReviewRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class HospitalService {
 
     private final HospitalRepository hospitalRepository;
@@ -23,10 +27,14 @@ public class HospitalService {
     }
     public List<HospitalResponseDto> getHospitalList() {
         List<Hospital> hospitalList = hospitalRepository.findAll();
-        List<HospitalResponseDto> hospitalResponseList = new ArrayList<>();
-        for (Hospital hospital:hospitalList) {
-            hospitalResponseList.add(new HospitalResponseDto(hospital.getId(), hospital.getName(), hospital.getAddress()));
-        }
+        List<HospitalResponseDto> hospitalResponseList = hospitalList.stream().map((hospital) -> {
+           return HospitalResponseDto.builder()
+                   .id(hospital.getId())
+                   .name(hospital.getName())
+                   .address(hospital.getAddress())
+                   .message("병원 조회 성공")
+                   .build();
+        }).collect(Collectors.toList());
 
         return hospitalResponseList;
     }
@@ -34,9 +42,14 @@ public class HospitalService {
 
 
     public HospitalResponseDto getHospital(Long id) {
-        Optional<Hospital> optHospital = hospitalRepository.findById(id);
-        List<Review> reviewList = reviewRepository.findByHospitalId(id);
-        return new HospitalResponseDto(optHospital.get().getId(), optHospital.get().getName(), optHospital.get().getAddress(), reviewList);
+        Hospital hospital = hospitalRepository.findById(id).get();
+        log.info("reviewList.size() : {}", hospital.getReviewList().size());
+        return HospitalResponseDto.builder()
+                .id(hospital.getId())
+                .name(hospital.getName())
+                .address(hospital.getAddress())
+                .message("병원 조회 성공")
+                .build();
     }
 
 }
