@@ -60,5 +60,6 @@
 |  병원 전체 리스트 조회  |        GET api/v1/hospitals        | http://ec2-3-35-227-194.ap-northeast-2.compute.amazonaws.com:8080/api/v1/hospitals |
 | 특정 병원 상세정보 조회 |     GET api/v1/hospitals/{id}      | http://ec2-3-35-227-194.ap-northeast-2.compute.amazonaws.com:8080/api/v1/hospitals/4 |
 |        댓글 등록        | POST api/v1/hospitals/{id}/reviews | http://ec2-3-35-227-194.ap-northeast-2.compute.amazonaws.com:8080/api/v1/hospitals/4/reviews |
+|  댓글 전체 리스트 조회  | GET api/v1/hospitals/{id}/reviews  | http://ec2-3-35-227-194.ap-northeast-2.compute.amazonaws.com:8080/api/v1/hospitals/4/reviews |
 | 특정 댓글 상세정보 조회 | GET api/v1/hospitals/reviews/{id}  | http://ec2-3-35-227-194.ap-northeast-2.compute.amazonaws.com:8080/api/v1/hospitals/reviews/2 |
 
