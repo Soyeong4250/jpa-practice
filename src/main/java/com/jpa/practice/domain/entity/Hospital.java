@@ -16,11 +16,11 @@ import java.util.List;
 @ToString
 public class Hospital {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String address;
 
     @OneToMany(mappedBy = "hospital")
+    @OrderBy("id asc")
     private List<Review> reviewList;
 }
