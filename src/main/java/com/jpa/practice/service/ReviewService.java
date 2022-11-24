@@ -24,7 +24,12 @@ public class ReviewService {
 
     public ReviewResponseDto add(ReviewRequestDto dto) {
         Optional<Hospital> hospital = hospitalRepository.findById(dto.getHospitalId());
-        Review review = new Review(dto.getTitle(), dto.getContent(), dto.getUserName(), hospital.get());
+        Review review = Review.builder()
+                .title(dto.getTitle())
+                .content(dto.getContent())
+                .userName(dto.getUserName())
+                .hospital(hospital.get())
+                .build();
         Review savedReview = reviewRepository.save(review);
         return new ReviewResponseDto(savedReview.getTitle(), savedReview.getContent(), savedReview.getUserName(),"리뷰 등록 성공");
     }
