@@ -26,7 +26,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("Spring Data Jpa Exercise API Test with Swagger")
-                .description("Swagger를 이용한 도서, 병원을 이용한 API 실습")
+                .description("Swagger를 이용한 도서, 병원 API 실습")
                 .version("1.0.0")
                 .build();
     }
