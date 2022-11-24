@@ -58,15 +58,17 @@
 
 <br />
 
-## 📒 Swagger EndPoint
+---
+
+### 📒 Swagger EndPoint
 
 http://ec2-3-35-227-194.ap-northeast-2.compute.amazonaws.com:8080/swagger-ui/
 
 <br />
 
-### ⚠ Swagger-ui 적용 시 발생하는 에러 및 해결 방법
+#### ⚠ Swagger-ui 적용 시 발생하는 에러 및 해결 방법
 
-#### ❗ 발생한 에러
+##### ❗ 발생한 에러
 
 ![image-20221125021321046](./assets/image-20221125021321046.png)
 
@@ -74,13 +76,13 @@ http://ec2-3-35-227-194.ap-northeast-2.compute.amazonaws.com:8080/swagger-ui/
 
 <br />
 
-#### ❓ 발생 원인
+##### ❓ 발생 원인
 
 👉 Spring boot 2.6 버전 이후 ```spring.mvc.pathmatch.matching-strategy``` 값이 ```ant_path_matcher```에서 ```path_pattern_parser```로 변경되어 발생하는 에러
 
 <br />
 
-#### 💡 해결방법
+##### 💡 해결방법
 
 ![image-20221125021521467](./assets/image-20221125021521467.png)
 
