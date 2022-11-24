@@ -38,7 +38,8 @@ public class HospitalRestController {
     }
 
     @PostMapping("/{id}/reviews")
-    public ResponseEntity<ReviewResponseDto> addReview(@PathVariable Long id, @RequestBody ReviewRequestDto reviewRequestDto) {
+    public ResponseEntity<ReviewResponseDto> addReview(@RequestBody ReviewRequestDto reviewRequestDto) {
+        log.info("{}", reviewRequestDto);
         return ResponseEntity.ok().body(reviewService.add(reviewRequestDto));
     }
 }
