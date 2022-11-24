@@ -16,5 +16,11 @@ public class HospitalResponseDto {
     private String name;
     private String address;
 
+    public HospitalResponseDto(Long id, String name, String address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+    }
+
     private List<Review> reviewList = new ArrayList<>();
 }
