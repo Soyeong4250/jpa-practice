@@ -25,10 +25,17 @@ public class Review {
     private String content;
 
     @Column(length = 45)
-    private String patientName;
+    private String userName;
 
     @ManyToOne
     @OrderBy("id asc")
-    @JoinColumn(name = "hospital2_id")
+    @JoinColumn(name = "hospital_id")
     private Hospital hospital;
+
+    public Review(String title, String content, String userName, Hospital hospital) {
+        this.title = title;
+        this.content = content;
+        this.userName = userName;
+        this.hospital = hospital;
+    }
 }

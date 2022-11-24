@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "hospital2")
@@ -19,4 +20,7 @@ public class Hospital {
     private Long id;
     private String name;
     private String address;
+
+    @OneToMany(mappedBy = "hospital")
+    private List<Review> reviewList;
 }
