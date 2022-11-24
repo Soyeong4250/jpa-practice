@@ -1,5 +1,6 @@
 package com.jpa.practice.domain.entity;
 
+import com.jpa.practice.domain.dto.ReviewResponseDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +10,6 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @ToString
 public class Review {
     @Id
@@ -29,4 +29,11 @@ public class Review {
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
 
+    @Builder
+    public Review(String title, String content, String userName, Hospital hospital) {
+        this.title = title;
+        this.content = content;
+        this.userName = userName;
+        this.hospital = hospital;
+    }
 }

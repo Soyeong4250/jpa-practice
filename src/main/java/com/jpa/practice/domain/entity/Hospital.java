@@ -1,9 +1,6 @@
 package com.jpa.practice.domain.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,7 +17,13 @@ public class Hospital {
     private String name;
     private String address;
 
-    @OneToMany(mappedBy = "hospital")
+    @OneToMany(mappedBy = "hospital", fetch = FetchType.LAZY)
     @OrderBy("id asc")
     private List<Review> reviewList;
+
+    @Builder
+    public Hospital(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
 }
