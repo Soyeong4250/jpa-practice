@@ -33,4 +33,9 @@ public class ReviewService {
         Review savedReview = reviewRepository.save(review);
         return new ReviewResponseDto(savedReview.getTitle(), savedReview.getContent(), savedReview.getUserName(),"리뷰 등록 성공");
     }
+
+    public ReviewResponseDto getReview(Long id) {
+        Review review = reviewRepository.findById(id).get();
+        return new ReviewResponseDto(review.getTitle(), review.getContent(), review.getUserName(), "리뷰 조회 성공");
+    }
 }

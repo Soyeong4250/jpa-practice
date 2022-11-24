@@ -42,4 +42,10 @@ public class HospitalRestController {
         log.info("{}", reviewRequestDto);
         return ResponseEntity.ok().body(reviewService.add(reviewRequestDto));
     }
+
+    @GetMapping("/reviews/{id}")
+    public ResponseEntity<ReviewResponseDto> getReview(@PathVariable Long id) {
+        ReviewResponseDto reviewResponseDto = reviewService.getReview(id);
+        return ResponseEntity.ok().body(reviewResponseDto);
+    }
 }
