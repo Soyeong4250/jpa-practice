@@ -27,13 +27,11 @@ public class HospitalService {
     public List<HospitalResponseDto> getHospitalList() {
         List<Hospital> hospitalList = hospitalRepository.findAll();
         List<HospitalResponseDto> hospitalResponseList = hospitalList.stream().map((hospital) -> {
-           return HospitalResponseDto.builder()
-                   .id(hospital.getId())
-                   .name(hospital.getName())
-                   .address(hospital.getAddress())
-                   .reviewCnt(reviewRepository.countByHospitalId(hospital.getId()))
-                   .message("병원 조회 성공")
-                   .build();
+            return HospitalResponseDto.builder()
+                    .id(hospital.getId())
+                    .name(hospital.getName())
+                    .address(hospital.getAddress())
+                    .build();
         }).collect(Collectors.toList());
 
         return hospitalResponseList;
@@ -48,7 +46,6 @@ public class HospitalService {
                 .id(hospital.getId())
                 .name(hospital.getName())
                 .address(hospital.getAddress())
-                .message("병원 조회 성공")
                 .build();
     }
 

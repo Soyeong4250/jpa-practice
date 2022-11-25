@@ -40,32 +40,19 @@ public class ReviewService {
                 .title(savedReview.getTitle())
                 .content(savedReview.getContent())
                 .userName(savedReview.getUserName())
-                .message("리뷰 등록 성공")
                 .build();
     }
 
     public ReviewResponseDto getReview(Long id) {
         Review review = reviewRepository.findById(id).orElseThrow(() -> new RuntimeException(String.format("%d 번의 리뷰가 없습니다.", id)));
-        return ReviewResponseDto.builder()
-                .hospitalName(review.getHospital().getName())
-                .title(review.getTitle())
-                .content(review.getContent())
-                .userName(review.getUserName())
-                .message("리뷰 조회 성공")
-                .build();
+        return ReviewResponseDto.fromEntity(review);
     }
 
     public List<ReviewResponseDto> getReviewList(Long hospitalId, Pageable pageable) {
         Hospital hospital = hospitalRepository.findById(hospitalId).orElseThrow(() -> new RuntimeException("해당 병원을 찾지 못했습니다."));
         Page<Review> reviewList = reviewRepository.findByHospital(hospital, pageable);
         List<ReviewResponseDto> reviewResponseList = reviewList.stream().map((review) -> {
-            return ReviewResponseDto.builder()
-                    .hospitalName(review.getHospital().getName())
-                    .title(review.getTitle())
-                    .content(review.getContent())
-                    .userName(review.getUserName())
-                    .message("리뷰 조회 성공")
-                    .build();
+            return ReviewResponseDto.fromEntity(review);
         }).collect(Collectors.toList());
         return reviewResponseList;
     }
