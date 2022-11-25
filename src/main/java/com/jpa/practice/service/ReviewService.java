@@ -55,8 +55,9 @@ public class ReviewService {
                 .build();
     }
 
-    public List<ReviewResponseDto> getReviewList(Long id, Pageable pageable) {
-        Page<Review> reviewList = reviewRepository.findByHospitalId(id, pageable);
+    public List<ReviewResponseDto> getReviewList(Long hospitalId, Pageable pageable) {
+        Hospital hospital = hospitalRepository.findById(hospitalId).orElseThrow(() -> new RuntimeException("해당 병원을 찾지 못했습니다."));
+        Page<Review> reviewList = reviewRepository.findByHospital(hospital, pageable);
         List<ReviewResponseDto> reviewResponseList = reviewList.stream().map((review) -> {
             return ReviewResponseDto.builder()
                     .hospitalName(review.getHospital().getName())
