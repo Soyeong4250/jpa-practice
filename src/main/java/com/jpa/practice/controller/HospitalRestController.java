@@ -44,8 +44,8 @@ public class HospitalRestController {
 
     @ApiOperation(value = "특정 병원의 모든 댓글 조회", notes = "@PathVariable을 활용한 GET Method")
     @GetMapping("/{id}/reviews")
-    public ResponseEntity<List<ReviewResponseDto>> getReviewByHospital(@PathVariable Long hospitalId, @PageableDefault(size = 10) Pageable pageable) {
-        List<ReviewResponseDto> reviewResponseList = reviewService.getReviewList(hospitalId, pageable);
+    public ResponseEntity<List<ReviewResponseDto>> getReviewByHospital(@PathVariable Long id, @PageableDefault(size = 10) Pageable pageable) {
+        List<ReviewResponseDto> reviewResponseList = reviewService.getReviewList(id, pageable);
         return ResponseEntity.ok().body(reviewResponseList);
     }
 
