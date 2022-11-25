@@ -36,6 +36,7 @@ public class ReviewService {
                 .build();
         Review savedReview = reviewRepository.save(review);
         return ReviewResponseDto.builder()
+                .hospitalName(review.getHospital().getName())
                 .title(savedReview.getTitle())
                 .content(savedReview.getContent())
                 .userName(savedReview.getUserName())
@@ -44,8 +45,9 @@ public class ReviewService {
     }
 
     public ReviewResponseDto getReview(Long id) {
-        Review review = reviewRepository.findById(id).get();
+        Review review = reviewRepository.findById(id).orElseThrow(() -> new RuntimeException(String.format("%d 번의 리뷰가 없습니다.", id)));
         return ReviewResponseDto.builder()
+                .hospitalName(review.getHospital().getName())
                 .title(review.getTitle())
                 .content(review.getContent())
                 .userName(review.getUserName())
@@ -57,6 +59,7 @@ public class ReviewService {
         Page<Review> reviewList = reviewRepository.findByHospitalId(id, pageable);
         List<ReviewResponseDto> reviewResponseList = reviewList.stream().map((review) -> {
             return ReviewResponseDto.builder()
+                    .hospitalName(review.getHospital().getName())
                     .title(review.getTitle())
                     .content(review.getContent())
                     .userName(review.getUserName())

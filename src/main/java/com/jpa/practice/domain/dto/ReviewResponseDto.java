@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ReviewResponseDto {
+    private String hospitalName;
     private String title;
     private String content;
     private String userName;
