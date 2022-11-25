@@ -5,11 +5,10 @@ import com.jpa.practice.domain.entity.Hospital;
 import com.jpa.practice.repository.HospitalRepository;
 import com.jpa.practice.repository.ReviewRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
+import javax.print.attribute.IntegerSyntax;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,6 +31,7 @@ public class HospitalService {
                    .id(hospital.getId())
                    .name(hospital.getName())
                    .address(hospital.getAddress())
+                   .reviewCnt(reviewRepository.countByHospitalId(hospital.getId()))
                    .message("병원 조회 성공")
                    .build();
         }).collect(Collectors.toList());

@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     Page<Review> findByHospitalId(Long id, Pageable pageable);
+
+    Long countByHospitalId(Long id);
 }

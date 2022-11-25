@@ -15,5 +15,6 @@ public class HospitalResponseDto {
     private Long id;
     private String name;
     private String address;
+    private Long reviewCnt;
     private String message;
 }
