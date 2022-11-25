@@ -7,7 +7,6 @@ import com.jpa.practice.service.HospitalService;
 import com.jpa.practice.service.ReviewService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.Response;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -57,10 +56,4 @@ public class HospitalRestController {
         return ResponseEntity.ok().body(reviewService.add(reviewRequestDto));
     }
 
-    @ApiOperation(value = "특정 댓글 상세정보 조회", notes = "@PathVariable을 활용한 GET Method")
-    @GetMapping("/reviews/{id}")
-    public ResponseEntity<ReviewResponseDto> getReview(@PathVariable Long id) {
-        ReviewResponseDto reviewResponseDto = reviewService.getReview(id);
-        return ResponseEntity.ok().body(reviewResponseDto);
-    }
 }
