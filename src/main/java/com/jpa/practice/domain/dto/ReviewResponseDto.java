@@ -1,5 +1,6 @@
 package com.jpa.practice.domain.dto;
 
+import com.jpa.practice.domain.entity.Review;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,5 +15,13 @@ public class ReviewResponseDto {
     private String title;
     private String content;
     private String userName;
-    private String message;
+
+    public static ReviewResponseDto fromEntity(Review review) {
+        return ReviewResponseDto.builder()
+                .hospitalName(review.getHospital().getName())
+                .title(review.getTitle())
+                .content(review.getContent())
+                .userName(review.getUserName())
+                .build();
+    }
 }
